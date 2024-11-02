@@ -34,7 +34,7 @@ int main(void)
     }
     else
     {
-        std::cout << glGetString(GL_EXTENSIONS) << std::endl;
+        // std::cout << glGetString(GL_EXTENSIONS) << std::endl;
     }
 
    
