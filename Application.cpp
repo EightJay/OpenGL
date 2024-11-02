@@ -16,12 +16,16 @@ static unsigned int CompileShader(unsigned int type, const std::string& source)
     if (result == GL_FALSE)
     {
         int length;
-        glGetShaderiv(id, GL_INFO_LOG_LENGTH, & length);
+
+        glGetShaderiv(id, GL_INFO_LOG_LENGTH, &length);
         char* message = (char*)alloca(length * sizeof(char));
         glGetShaderInfoLog(id, length, &length, message);
-        std::cout << "fail to compile" << (type == GL_VERTEX_SHADER ? "vertex" : "fragment") << std::endl;
+        std::cout << "fail  to compile" << 
+            (type == GL_VERTEX_SHADER ? "vertex" : "fragment") << std::endl;
         std::cout << message << std::endl;
         glDeleteShader(id);
+
+
         return 0;
     }
 
@@ -114,6 +118,8 @@ int main(void)
         "    color = vec4(1.0, 0.0, 0.0, 1.0);\n"
         "}\n";
 
+
+    // this shader is a program.
     unsigned int shader = CreateShader(vertexShader, fragmentShader);
     glUseProgram(shader);
 
@@ -134,6 +140,8 @@ int main(void)
         glfwPollEvents();
     }
     
+    glDeleteProgram(shader);
+
     glfwTerminate();
     return 0;
 }
